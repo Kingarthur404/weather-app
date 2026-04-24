@@ -1,3 +1,5 @@
+let apiKey = "0d3379b46oc5bbf60f2b70t899b1a212";
+
 function formatDate(date) {
   let days = [
     "Sunday",
@@ -24,6 +26,46 @@ function formatDate(date) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function formatForecastDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[date.getDay()];
+}
+
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = "";
+
+  response.data.daily.forEach(function (day, index) {
+    if (index < 5) {
+      forecastHTML += `
+        <div class="forecast-day">
+          <div>${formatForecastDay(day.time)}</div>
+          <img
+            src="${day.condition.icon_url}"
+            alt="${day.condition.description}"
+            class="forecast-icon"
+          />
+          <div class="forecast-temperatures">
+            <span>${Math.round(day.temperature.maximum)}°</span>
+            <span class="forecast-min">${Math.round(
+              day.temperature.minimum
+            )}°</span>
+          </div>
+        </div>
+      `;
+    }
+  });
+
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(city) {
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function displayWeather(response) {
   let city = response.data.city;
   let temperature = Math.round(response.data.temperature.current);
@@ -41,14 +83,12 @@ function displayWeather(response) {
   let iconElement = document.querySelector("#weather-icon");
   iconElement.setAttribute("src", iconUrl);
   iconElement.setAttribute("alt", description);
+
+  getForecast(city);
 }
 
-// 🔹 ESTA É A PARTE "AJAX WITH AXIOS"
 function searchCity(city) {
-  let apiKey = "0d3379b46oc5bbf60f2b70t899b1a212";
-
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-
   axios.get(apiUrl).then(displayWeather);
 }
 
@@ -58,11 +98,9 @@ function handleSearch(event) {
   searchCity(city);
 }
 
-// inicialização
 document.querySelector("#current-date").innerHTML = formatDate(new Date());
 
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSearch);
 
-// default city
 searchCity("Paris");
