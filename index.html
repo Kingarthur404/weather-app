@@ -3,14 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
-
     <link rel="stylesheet" href="style.css" />
-
     <title>Weather App</title>
   </head>
 
@@ -23,49 +20,49 @@
             id="search-input"
             placeholder="Enter a city.."
             required
+            class="search-input"
           />
-          <input type="submit" value="Search" />
+          <input type="submit" value="Search" class="search-button" />
         </form>
       </header>
 
       <main>
-        <h1 id="current-city">Paris</h1>
+        <div class="current-weather">
+          <div>
+            <h1 id="current-city">Paris</h1>
+            <p class="current-details">
+              <span id="current-date"></span>, moderate rain
+              <br />
+              Humidity: <strong>87%</strong>, Wind:
+              <strong>7.2km/h</strong>
+            </p>
+          </div>
 
-        <p>
-          <span id="current-date"></span><br />
-        </p>
-
-        <p>
-          Temperature:
-          <strong><span id="temperature">24</span>°C</strong>
-        </p>
+          <div class="current-temperature">
+            <span class="current-temperature-icon">☀️</span>
+            <span id="temperature">24</span>
+            <span class="current-temperature-unit">°C</span>
+          </div>
+        </div>
       </main>
 
       <footer>
-        <p>
-          This project was coded by
-          <a href="https://github.com/Kingarthur404" target="_blank">
-            Maria Costa Santos
-          </a>
-          and is
-          <a
-            href="https://github.com/Kingarthur404/weather-app"
-            target="_blank"
-          >
-            open-sourced on GitHub
-          </a>
-          and
-          <a href="https://YOUR-NETLIFY-LINK.netlify.app" target="_blank">
-            hosted on Netlify
-          </a>
-        </p>
+        This project was coded by
+        <a href="https://github.com/Kingarthur404" target="_blank">
+          Maria Costa Santos</a
+        >
+        and is
+        <a href="https://github.com/Kingarthur404/weather-app" target="_blank">
+          open-sourced on GitHub</a
+        >
+        and
+        <a href="https://weather-appmcs.netlify.app/" target="_blank">
+          hosted on Netlify</a
+        >.
       </footer>
     </div>
 
-    <!-- AXIOS -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-    <!-- TEU JS -->
     <script src="script.js"></script>
   </body>
 </html>
