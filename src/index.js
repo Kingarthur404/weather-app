@@ -43,8 +43,10 @@ function displayWeather(response) {
   iconElement.setAttribute("alt", description);
 }
 
+// 🔹 ESTA É A PARTE "AJAX WITH AXIOS"
 function searchCity(city) {
   let apiKey = "0d3379b46oc5bbf60f2b70t899b1a212";
+
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(displayWeather);
@@ -56,10 +58,11 @@ function handleSearch(event) {
   searchCity(city);
 }
 
+// inicialização
 document.querySelector("#current-date").innerHTML = formatDate(new Date());
 
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSearch);
 
+// default city
 searchCity("Paris");
-
