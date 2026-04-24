@@ -1,46 +1,74 @@
-function formatDate(date) {
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
-  let day = date.getDay();
-
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
-
-  let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
-  ];
-
-  return `${days[day]} ${hours}:${minutes}`;
+body {
+  background: #f9f7fe;
+  font-family: "Roboto", sans-serif;
 }
 
-function displayWeather(response) {
-  let temperature = Math.round(response.data.temperature.current);
-  let city = response.data.city;
-
-  document.querySelector("#temperature").innerHTML = temperature;
-  document.querySelector("#current-city").innerHTML = city;
+.weather-app {
+  background: white;
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 30px 50px rgba(65, 50, 100, 0.08);
 }
 
-function search(event) {
-  event.preventDefault();
-
-  let city = document.querySelector("#search-input").value;
-  let apiKey = "0d3379b46oc5bbf60f2b70t899b1a212";
-
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-
-  axios.get(apiUrl).then(displayWeather);
+header {
+  border-bottom: 1px solid #f9f7fe;
+  padding-bottom: 30px;
 }
 
-let form = document.querySelector("#search-form");
-form.addEventListener("submit", search);
+form {
+  display: flex;
+  gap: 10px;
+}
 
-let now = new Date();
-document.querySelector("#current-date").innerHTML = formatDate(now);
+input[type="search"] {
+  background-color: #f9f7fe;
+  border: none;
+  padding: 20px;
+  width: 75%;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+input[type="submit"] {
+  background-color: #885df1;
+  color: white;
+  border: none;
+  padding: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+main {
+  padding: 30px 0;
+}
+
+#current-city {
+  font-size: 38px;
+  font-weight: 900;
+  margin: 0;
+}
+
+#current-date {
+  color: rgba(39, 33, 66, 0.4);
+  display: block;
+  margin-bottom: 10px;
+}
+
+#temperature {
+  font-size: 60px;
+  font-weight: bold;
+}
+
+footer {
+  border-top: 1px solid #f9f7fe;
+  text-align: center;
+  padding-top: 15px;
+  color: rgba(39, 33, 66, 0.4);
+}
+
+a {
+  color: #885df1;
+}
